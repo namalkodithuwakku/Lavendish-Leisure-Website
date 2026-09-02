@@ -1,15 +1,2 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { ContactActions, MobileDock, SiteFooter, SiteHeader } from "@/components/SiteChrome";
-import { hotels } from "@/lib/hotels";
-
-export const metadata: Metadata = { title:"All Hotels | Lavendish Leisure Sri Lanka", description:"Explore all ten Lavendish Leisure hotels in Kataragama, Anuradhapura, Giritale, Unawatuna, Wasgamuwa, Wilpattu, Kandy and Dambulla." };
-
-export default function HotelsPage(){
-  return <main><SiteHeader/>
-    <section className="inner-hero"><p className="eyebrow">THE LAVENDISH COLLECTION</p><h1>Ten hotels.<br/>Eight destinations.</h1><p>Find the setting that matches how you want to travel across Sri Lanka.</p></section>
-    <section className="all-hotels">{hotels.map(h=><article className="hotel-list-card" key={h.slug}><Link className="hotel-list-image" href={`/hotels/${h.slug}`}><img src={h.image} alt={`${h.name}, ${h.destination}`}/></Link><div><p className="eyebrow purple">{h.destination} · {h.region}</p><h2>{h.name}</h2><p>{h.intro}</p><div className="tag-list">{h.experiences.map(x=><span key={x}>{x}</span>)}</div><div className="inline-actions"><Link href={`/hotels/${h.slug}`}>View hotel →</Link><a href={`tel:${h.phone}`}>Call hotel</a></div></div></article>)}</section>
-    <section className="help-strip"><div><p className="eyebrow purple">PERSONAL RESERVATION SUPPORT</p><h2>Not sure which hotel to choose?</h2></div><ContactActions compact/></section>
-    <SiteFooter/><MobileDock/>
-  </main>;
-}
+import Link from "next/link"; import {hotels} from "@/lib/hotels"; import {MobileDock,SiteFooter,SiteHeader} from "@/components/SiteChrome";
+export default function HotelsPage(){return <main><SiteHeader/><section className="page-hero"><img src={hotels[3].image} alt="Lavendish hotels across Sri Lanka"/><div/><section><p className="kicker light">TEN DISTINCTIVE STAYS</p><h1>Our hotels</h1><p>From pilgrimage towns and ancient capitals to national parks, lakes, hills and the coast.</p></section></section><section className="hotel-directory"><div className="directory-intro"><p className="kicker">THE COLLECTION</p><h2>Choose by destination</h2><p>Every Lavendish hotel has its own setting, rhythm and reason to stay.</p></div><div className="directory-list">{hotels.map((h,i)=><article key={h.slug}><Link href={`/hotels/${h.slug}`}><div className="directory-image"><img src={h.image} alt={h.name}/><span>{String(i+1).padStart(2,"0")}</span></div><div className="directory-copy"><p>{h.region}</p><h3>{h.name}</h3><span>{h.destination}</span><small>{h.intro}</small><b>Discover hotel ↗</b></div></Link></article>)}</div></section><SiteFooter/><MobileDock/></main>}

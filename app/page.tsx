@@ -1,30 +1,10 @@
 import Link from "next/link";
 import { ContactActions, MobileDock, SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import { hotels } from "@/lib/hotels";
-
-const experiences = ["Family breaks","Wildlife & safari","Pilgrimage & culture","Beach stays","Lakeside calm","Hill country"];
-
-export default function Home() {
-  return <main>
-    <SiteHeader />
-    <section className="hero" id="top">
-      <img src={hotels[0].image} alt="Guests enjoying the pool and green landscape at Grand Tamarind Lake, Kataragama" />
-      <div className="hero-shade" />
-      <div className="hero-content"><p className="eyebrow">TEN HOTELS · EIGHT SRI LANKAN DESTINATIONS</p><h1>Your island.<br/>Your kind of stay.</h1><p className="hero-copy">From family weekends and sacred journeys to wild landscapes, tranquil lakes, storied hills and the southern coast.</p><div className="hero-actions"><a className="primary" href="#booking">Find a stay</a><Link className="ghost" href="/hotels">Our hotels</Link></div></div>
-      <div className="trust-strip"><span><strong>10</strong> hotels</span><span><strong>8</strong> destinations</span><span><strong>1</strong> Sri Lankan journey</span></div>
-    </section>
-    <section className="booking-wrap" id="booking"><ContactActions /></section>
-
-    <section className="intro" id="offers"><div><p className="eyebrow purple">MADE FOR SRI LANKAN GETAWAYS</p><h2>A better break,<br/>closer than you think.</h2></div><div><p>Plan a weekend, school holiday, pilgrimage or family journey with clear options, direct assistance and Lavendish stays across the island.</p><Link className="text-link" href="/hotels">Explore all hotels →</Link></div></section>
-
-    <section className="experience-section" id="experiences"><div className="section-title"><p className="eyebrow purple">CHOOSE BY EXPERIENCE</p><h2>What does your next stay feel like?</h2></div><div className="experience-row">{experiences.map((item,index)=><Link href="/hotels" className="experience-chip" key={item}><span>0{index+1}</span>{item}</Link>)}</div></section>
-
-    <section className="hotel-section" id="hotels"><div className="section-title split"><div><p className="eyebrow purple">THE LAVENDISH COLLECTION</p><h2>Ten places to call yours</h2></div><Link className="text-link" href="/hotels">View the complete collection →</Link></div>
-      <div className="collection-grid">{hotels.map((hotel)=><article className="collection-card" key={hotel.slug}><Link href={`/hotels/${hotel.slug}`}><img src={hotel.image} alt={`${hotel.name} in ${hotel.destination}`}/><div className="card-shade"/><div className="hotel-content"><p>{hotel.destination}</p><h3>{hotel.name}</h3><span>{hotel.experiences.slice(0,3).join(" · ")}</span><b>Explore hotel →</b></div></Link></article>)}</div>
-    </section>
-
-    <section className="journey-banner"><div><p className="eyebrow">FIND YOUR LAVENDISH</p><h2>One trip. More of Sri Lanka.</h2><p>Combine culture, wildlife, hills and the coast into one smooth multi-hotel journey.</p></div><a href="https://findyourlavendish.vercel.app/">Plan my journey →</a></section>
-    <section className="help-strip"><div><p className="eyebrow purple">NEED A HUMAN TOUCH?</p><h2>Let our reservations team plan it with you.</h2></div><ContactActions compact /></section>
-    <SiteFooter/><MobileDock/>
-  </main>;
-}
+const journeys=[{title:"Sacred & Wild",copy:"Kataragama devotion with the landscapes of Yala.",hotel:"Grand Tamarind Lake",image:hotels[0].image},{title:"Ancient & Still",copy:"Anuradhapura, Giritale and the Cultural Triangle.",hotel:"Miridiya Lake Resort",image:hotels[3].image},{title:"Coast & Culture",copy:"Unawatuna days with Galle’s living heritage.",hotel:"Lavendish Beach Resort",image:hotels[5].image}];
+export default function Home(){return <main><SiteHeader/><section className="new-hero" id="top"><img src={hotels[0].image} alt="Grand Tamarind Lake in Kataragama"/><div className="new-hero-overlay"/><div className="new-hero-copy"><p className="kicker light">LAVENDISH LEISURE · SRI LANKA</p><h1>Stay closer<br/>to the island.</h1><p>Ten distinctive hotels. Eight destinations. One Sri Lankan welcome.</p><div className="hero-links"><Link href="/hotels">Discover our hotels</Link><a href="#reserve">Book your stay</a></div></div><div className="hero-index"><span>01</span><div/><span>03</span></div></section><section className="reservation-bar" id="reserve"><div><span>DESTINATION</span><strong>Where would you like to stay?</strong></div><div><span>DATES</span><strong>Choose your travel dates</strong></div><div><span>GUESTS</span><strong>2 guests · 1 room</strong></div><a href="https://lavendishleisure.com/booking/">Check availability</a></section>
+<section className="editorial-intro"><p className="vertical-note">OUR ISLAND · YOUR STORY</p><div><p className="kicker">THE LAVENDISH WAY</p><h2>Different places.<br/>One warm welcome.</h2></div><div className="intro-copy"><p>From sacred Kataragama and ancient Anuradhapura to elephant country, quiet lakes, Kandy’s hills and the southern coast, Lavendish brings you closer to the Sri Lanka you came to experience.</p><Link href="/hotels">Explore the collection <span>↗</span></Link></div></section>
+<section className="featured-properties"><div className="feature-image"><img src={hotels[5].image} alt="Lavendish Beach Resort, Unawatuna"/><span>COAST</span></div><div className="feature-copy"><p className="kicker">FEATURED STAY</p><h2>Lavendish Beach Resort</h2><p>Four-star comfort near Unawatuna’s golden shoreline, made for unhurried days, coastal discovery and warm evenings by the sea.</p><div className="feature-meta"><span>Unawatuna</span><span>Beach</span><span>Galle</span></div><Link href="/hotels/lavendish-beach-resort-unawatuna">Discover the hotel</Link></div></section>
+<section className="property-showcase"><div className="section-head"><div><p className="kicker">OUR COLLECTION</p><h2>Find your place in Sri Lanka</h2></div><Link href="/hotels">View all ten hotels</Link></div><div className="property-scroll">{hotels.slice(0,6).map((hotel,i)=><article key={hotel.slug} className="property-tile"><Link href={`/hotels/${hotel.slug}`}><div className="tile-image"><img src={hotel.image} alt={hotel.name}/><span>0{i+1}</span></div><p>{hotel.region}</p><h3>{hotel.name}</h3><small>{hotel.destination}</small></Link></article>)}</div></section>
+<section className="journeys" id="experiences"><div className="section-head inverse"><div><p className="kicker light">EXPLORE SRI LANKA</p><h2>Journeys with a sense of place</h2></div><a href="https://findyourlavendish.vercel.app/">Plan a multi-hotel journey</a></div><div className="journey-grid">{journeys.map(j=><article key={j.title}><img src={j.image} alt={j.title}/><div><p>{j.hotel}</p><h3>{j.title}</h3><span>{j.copy}</span></div></article>)}</div></section>
+<section className="experience-band"><div><p className="kicker">EXPERIENCE</p><h2>More than a room</h2></div><div className="experience-list"><span>Wildlife safaris</span><span>Sacred journeys</span><span>Ancient cities</span><span>Coastal days</span><span>Lakeside calm</span><span>Hill-country culture</span></div></section><section className="direct-section"><div><p className="kicker">BOOK DIRECT</p><h2>Your stay, thoughtfully arranged.</h2><p>Speak directly with our reservations team for individual stays, family holidays, group travel and journeys across more than one Lavendish hotel.</p></div><ContactActions/></section><SiteFooter/><MobileDock/></main>}
